@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@types/bun": "^1.0.12",
+    "axios": "^1.6.8",
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}

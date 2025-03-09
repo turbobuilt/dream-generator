@@ -1,0 +1,1 @@
+npx nodemon -e ts,js,json -w . --exec "tsx src/main.ts"

@@ -1,0 +1,15 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "ai.dreamgenerator.app",
+            "sha256_cert_fingerprints": [
+                "81:CC:81:AC:D0:F0:17:3E:BA:77:94:30:0A:5C:F5:BF:38:E4:83:03:55:7A:1B:AD:64:BB:BB:13:6E:ED:33:25",
+                "FF:49:8B:0D:E0:AB:31:0F:59:C0:EE:83:08:50:1B:27:68:31:4E:DA:03:29:16:01:8C:B5:19:E3:68:AE:46:A5"
+            ]
+        }
+    }
+]

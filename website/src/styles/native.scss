@@ -1,0 +1,38 @@
+.native-page {
+    background: white;
+    box-shadow: 0 0 4px gray;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    h1 {
+        margin: 0;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    .download-button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .download-button {
+        text-decoration: none;
+        line-height: 1;
+        padding: 5px 10px;
+        border: 3px solid #205978;
+        border-radius: 5px;
+        // background is gold to blue gradient
+        color: white;
+        font-size: 18px;
+        $bg1: #e6b15f;
+        $bg2: #9f2825;
+        background: linear-gradient(90deg, $bg1, $bg2);
+        cursor: pointer;
+        transition: all .2s;
+        &:hover{
+            background: linear-gradient(90deg, darken($bg1, 10%), darken($bg2, 10%));
+        }
+    }
+}
+* {
+    box-sizing: border-box;
+}

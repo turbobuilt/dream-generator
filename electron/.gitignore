@@ -1,0 +1,16 @@
+node_modules
+release/
+releases/
+models/**/*.bin
+models/**/*.xml
+models/**/*.json
+models/**/*.json
+models/**/cleaned.wav
+models/**/openvino_runtime_win32/*
+*.safetensors
+*.zip
+*.log
+*.bmp
+*.blob
+*.log
+keys.txt

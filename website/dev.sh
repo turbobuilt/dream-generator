@@ -1,0 +1,1 @@
+bunx nodemon -e scss,html,js,ts --watch src --exec "bun build.ts && bunx serve build"

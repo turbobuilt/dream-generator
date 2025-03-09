@@ -1,0 +1,35 @@
+{
+    "applinks": {
+        "details": [
+            {
+                "appIDs": [ "9PWJ8B6CUX.ai.dreamgenerator.app", "ZQV2BHJ97R.ai.dreamgenerator.app" ],
+                "components": [
+                    {
+                        "/": "/share/*",
+                        "comment": "Matches any URL with a path that starts with /buy/."
+                    },
+                    {
+                        "/": "/create/*",
+                        "comment": "Matches any URL with a path that starts with /buy/."
+                    },
+                    {
+                        "/": "/create*",
+                        "comment": "Matches any URL with a path that starts with /buy/."
+                    },
+                    {
+                        "/": "/create",
+                        "comment": "Matches any URL with a path that starts with /buy/."
+                    }
+                ]
+            }
+        ]
+    },
+    "webcredentials": {
+        "apps": [ "9PWJ8B6CUX.ai.dreamgenerator.app", "ZQV2BHJ97R.ai.dreamgenerator.app" ]
+    },
+
+
+    "appclips": {
+        "apps": [ "9PWJ8B6CUX.ai.dreamgenerator.app", "ZQV2BHJ97R.ai.dreamgenerator.app" ]
+    }
+}

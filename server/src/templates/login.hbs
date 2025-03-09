@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Dream Generator AI Art is a next-level AI content generation platform.  Generate AI images with ease.">
+        <title>Dream Generator AI Art</title>
+        <style>
+.feed-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+.feed-item {
+    width: 300px;
+    flex-grow: 1;
+    background: white;
+    margin-bottom: 10px;
+    max-width: 400px;
+}
+.feed-item img {
+    max-width: 100%;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+a, a:hover, a:visited {
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+}
+* { box-sizing: border-box; font-family:  Arial, Helvetica, sans-serif; margin: 0;padding:0; }
+</style>
+    </head>
+    <body>
+        <div class="feed-page">
+            {{> title}}
+            <div class="feed-items">
+                {{#each items}}
+                <a href="/share/{{id}}" class="feed-item">
+                    <img src="https://images.dreamgenerator.ai/{{imagePath}}" alt="{{text}}"/>
+                    <div>{{ text }}</div>
+                </a>
+                {{/each}}
+            </div>
+            <div class="pagination">
+                <a href="/feed?last={{last}}" class="next">Next</a>
+            </div>
+        </div>
+    </body>
+</html> 

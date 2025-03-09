@@ -1,0 +1,17 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    equal_elements_in_set: ignore
+    unused_import: ignore
+    must_be_immutable: ignore
+    empty_catches: false
+
+linter:
+  rules:
+    prefer_const_constructors: true
+    prefer_final_fields: false
+    use_key_in_widget_constructors: false
+    avoid_print: false
+    # allow no braces after if statement
+    curly_braces_in_flow_control_structures: false

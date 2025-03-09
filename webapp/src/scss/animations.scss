@@ -1,0 +1,138 @@
+.swipe-forward-enter-from, .swipe-forward-enter-active, .swipe-forward-enter-to, .swipe-forward-leave-from, .swipe-forward-leave-active, .swipe-forward-leave-to {
+    transition: transform .2s ease;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.swipe-forward-leave-to {
+    transform: translateX(-100%);
+}
+.swipe-forward-enter-from {
+    transform: translateX(100%);
+}
+.swipe-forward-enter-from, .swipe-forward-enter-active, .swipe-forward-enter-to {
+    z-index: 10;
+}
+.swipe-backward-enter-from, .swipe-backward-enter-active, .swipe-backward-enter-to, .swipe-backward-leave-from, .swipe-backward-leave-active, .swipe-backward-leave-to {
+    transition: transform .2s ease;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.swipe-backward-enter-from {
+    transform: translateX(-100%);
+}
+.swipe-backward-leave-to {
+    transform: translateX(100%);
+}
+.swipe-backward-leave-from, .swipe-backward-leave-active, .swipe-backward-leave-to {
+    z-index: 10;
+    // box-shadow: 0 0 4px black;
+}
+
+.height-enter-from, .height-enter-to, .height-leave-from, .height-leave-to {
+    transition: height .05s ease;
+    overflow: hidden;
+}
+.height-enter-from, .height-leave-to, .height-leave-active {
+    height: 0 !important;
+}
+.height-enter-to, .height-leave-from {
+    height: 35px !important;
+}
+
+
+
+.shrink-enter-active, .shrink-leave-active {
+    transition: all 0.5s ease;
+}
+.shrink-enter, .shrink-leave-to {
+    height: 0;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+.slide-up-enter-from, .slide-up-leave-to {
+    transform: translateY(100%) !important;
+    &.x-50 {
+        transform: translateY(100%) translateX(-50%) !important;
+    }
+}
+.slide-up-enter-active, .slide-up-leave-active {
+    // transition: transform 5s ease;
+}
+.slide-up-enter-to, .slide-up-leave-from {
+    transform: translateY(0) !important;
+    &.x-50 {
+        transform: translateY(0) translateX(-50%) !important;
+    }
+}
+
+
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.fade-enter-active {
+    // css transition to ease in
+    transition: opacity 0.5s ease-in;
+}
+.fade-leave-active {
+    // css transition to ease out
+    transition: opacity 0.5s ease-out;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.fade-enter-to, .fade-leave-from {
+    opacity: 1;
+}
+
+.fade-fast-enter-from, .fade-fast-leave-to {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.fade-fast-enter-active, .fade-fast-leave-active {
+    transition: opacity 0.1s ease;
+}
+.fade-fast-enter-to, .fade-fast-leave-from {
+    opacity: 1;
+}
+
+.gridheight-enter-from, .gridheight-leave-to {
+    grid-template-rows: min-content 0fr;
+    // height: 0;
+}
+.gridheight-enter-to, .gridheight-leave-from {
+    grid-template-rows: min-content 1fr;
+    // height: 100px;
+}
+.gridheight-enter-active, .gridheight-leave-active {
+    transition: all .2s ease;
+}
+
+.fade-bg-enter-from, .fade-bg-leave-to {
+    opacity: 0;
+}
+.fade-bg-enter-to, .fade-bg-leave-from {
+    opacity: 1;
+}
+
+
+.bottom-sheet-desktop-fade-enter-from, .bottom-sheet-desktop-fade-leave-to {
+    opacity: 0;
+    position: absolute;
+    // width: 100%;
+    // height: 100%;
+}
+.bottom-sheet-desktop-fade-enter-active, .bottom-sheet-desktop-fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+.bottom-sheet-desktop-fade-enter-to, .bottom-sheet-desktop-fade-leave-from {
+    opacity: 1;
+}

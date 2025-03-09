@@ -1,0 +1,1 @@
+/System/Volumes/Data/Users/dev/Library/Python/3.9/bin/omz_downloader 

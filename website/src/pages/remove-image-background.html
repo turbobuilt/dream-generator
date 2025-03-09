@@ -1,0 +1,82 @@
+description: Remove image background with AI super quickly. Learn how image background removal works under the hood too! Remove bg from any kind of image.
+title: Dream Generator AI Art | Remove BG
+<div class="background-removal-page">
+    <style>
+        body, html { margin: 0; padding: 0; }
+        .background-removal-page { background: #2d2a2a }
+        .content { padding: 20px; width: 100%; max-width: 800px; margin: 30px auto; box-shadow: 0 0 5px rgba(0,0,0,.5); background: white; }
+        div { margin-bottom: 10px }
+        pre { font-family: monospace; font-size: 16px; }
+    </style>
+    <div class="content">
+        <h1 style="margin-top: 0;">How Does Image Background Removal Work?</h1>
+        <h2>And how do I remove backgrounds from my images automatically online?</h2>
+        <br>
+        <a style="line-height: 1; text-decoration: none; border-radius: 5px; padding: 6px; background: rgb(7, 73, 139); color: white; margin-bottom: 25px; display: inline-block;" href="/app/#/remove-background">Click Here Remove Image Background From Your Image</a>
+        <br>
+        <div>Take for example this playstation controller image:</div>
+        <img src="/assets/remove-background/playstation-vr-2-right-controller.avif" alt="Playstation VR 2 Controller" width="512" height="369"/>
+        <div>It's a great image, but the background is a bit distracting. Let's remove it!</div>
+        <div>With Dream Generator AI, you can remove the background from any image in seconds!</div>
+        <div>Just upload the image, and click "Remove Background" and you're done!</div>
+        <div>Here's the result:</div>
+        <img src="/assets/remove-background/playstation-vr-2-right-controller-background-removed.avif" alt="Playstation VR 2 Controller with Background Removed" width="512" height="369"/>
+        <div>Prety cool huh!</div>
+
+        <br>
+        <a style="line-height: 1; text-decoration: none; border-radius: 5px; padding: 6px; background: rgb(7, 73, 139); color: white; margin-bottom: 25px; display: inline-block;" href="/app/#/remove-background">Click Here Remove Image Background</a>
+
+        <br>
+        <div>Image background removal uses the miracle of AI known as a Convolution</div>
+        <div>What is a convolution, you may ask?</div>
+        <div>Well it's not too complicated, but it does require a bit of thinking.</div>
+        <div>Convolutions recognize simple patterns in numbers.</div>
+        <div>These patterns can be found in foreground content, like a person, or background content that needs to be removed.</div>
+        <div>Through many iterations of training, the system learns what these patterns are, and settles on a series of specific numbers that help recognize these patterns in background or foreground objects. That's what the convolution is.</div>
+        <br>
+        <div>The "convolution" takes a set of input numbers that represent the brightness and color of each point in the image and combines them with other numbers that are specially tuned to recognize patterns in these numbers.</div>
+        <div>This is kind of complicated so here's an example:</div>
+        <div>Input Numbers: 100 200 50</div>
+        <div>Special numbers: 1, .5, 1</div>
+        <div>Output numbers: 100, 100, 50</div>
+        <div>Then the system adds up the numbers to get 250.</div>
+        <br>
+        <div>Here's a more complicated one</div>
+        <pre>
+            1 0 1
+            0 1 0
+            1 0 1
+        </pre>
+        <div>This group of special numbers recognizes... the letter X! See it?</div>
+        <br>
+        <div>How about this one?</div>
+        <pre>
+            0 1 0
+            1 0 1
+            0 1 0
+        </pre>
+        <div>This group of special numbers recognizes... the letter O! I think you can see this one too.</div>
+        <div>You can look at the shape of the pattern to see what it recognizes. These are the "special" numbers, and they are called a "filter".  Then you can multiply these "special" numbers by the inputs, and you can see how well the input matches the pattern!</div>
+        <div>This is how AI works.</div>
+        <br>
+
+        <div>While this may seem stupid, you can use this simple system to recognize small patterns</div>
+        <div>In real networks, you do this millions of times, and based on what the "special" numbers are, you actually get meaningful results! It's kind of wild but it's true.</div>
+        <div>For example, you can recognize background static, or you can recognize a person's hair.</div>
+        <div>You take these convolutions and stack them on top of each other and make millions or billions of them, and you can recognize billions of patterns.</div>
+        <div>Once you recognize these patterns, you can effectively remove backgrounds from anything because the system has recognized what foreground and background patterns look like!</div>
+        <br>
+        <div>With convolutions on Dream Generator AI, you can remove backgrounds from anything.</div>
+        <div><b>Note: you don't need any special training to do this on Dream Generator... you just point and click</b></div>
+        <div>But under the hood, you can use convolutions to:</div>
+        <br>
+        <div>Remove backgrounds from product images</div>
+        <div>Remove backgrounds from photos of people or animals</div>
+        <div>Remove backgrounds from photos of cars</div>
+        <div>Remove backgrounds from photos of landscapes</div>
+        <div>Remove bg from photos of anything!</div>
+        <div>So get started clearing those backgrounds out today with Dream Generator, the AI Super App!</div>
+        <br>
+        <a style="line-height: 1; text-decoration: none; border-radius: 5px; padding: 6px; background: rgb(7, 73, 139); color: white; margin-bottom: 25px; display: inline-block;" href="/app/#/remove-background">Click Here Remove Image Background From Your Image</a>
+    </div>
+</div>

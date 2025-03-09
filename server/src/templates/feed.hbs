@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet"> -->
+
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Dream Generator AI Art is a next-level AI content generation platform.  Generate AI images with ease.">
+        <title>Dream Generator AI Art</title>
+        <style>
+.feed-page { display: flex; flex-direction: column; align-items: center; }
+.main-header { width: 100% }
+.image-description { padding: 4px 0; }
+.image-description::first-letter {text-transform: uppercase}
+:root {
+    --image-max-width: 500px;
+}
+.feed-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: min(100%, calc(var(--image-max-width)*2));
+    padding: 10px;
+}
+.feed-item {
+    width: 50%;
+    flex-grow: 1;
+    background: white;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+@media (max-width: 500px) {
+    .feed-item { max-width: 100%; } 
+    .feed-items { padding-top: 0; }  
+}
+.feed-item .feed-image {
+    width: 100%;
+    padding: 50%;
+    background-position: center;
+    background-size: cover;
+    background-color: gainsboro;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+h1 {
+    width: 100%;
+    text-align: center;
+    background-color: purple;
+    padding: 20px;
+    color: white;
+}
+a, a:hover, a:visited {
+    color: rgb(51, 51, 51);
+    text-decoration: none;
+}
+.nudity-notice {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: whitesmoke;
+    padding: 3px;
+    text-align: center;
+    box-shadow: 0 0 4px rgba(0,0,0,.4);
+}
+.click-to-change {
+    /*color: rgb(33,150,243); */
+    text-decoration: underline;
+    cursor: pointer;
+}
+.dismiss {
+    margin-left: 10px;
+}
+.separator {
+    display: none;
+}
+.separator:nth-of-type(2n) {
+    display: block;
+    width: 100%;
+}
+.space {
+    height: 50px;
+}
+@media(min-width:768px) {
+    .feed-items {
+        
+    }
+}
+.logo-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.logo {
+    height: 50px;
+    border-radius: 4px;
+}
+/*a.next {
+    border: 2px solid rgb(33,150,243);
+    background: rgb(77,77,77);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 4px;
+    width: 80%;
+    text-align: center;
+}*/
+* { box-sizing: border-box; font-family:  Arial, Helvetica, sans-serif; margin: 0;padding:0; }
+</style>
+<script>
+function dismissNotice() {
+    console.log("dismissNotice")
+    // set cookie called nudityNoticeDismissed
+    document.cookie = "nudityNoticeDismissed=true; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    document.querySelector('.nudity-notice').style.display = 'none';
+}
+function allowNudity() {
+    window.tryAllowNudity = true;
+    document.querySelector('.login-background').style.display = 'flex';
+}
+var last = "{{last}}", done = false, loading = false, showingPagination = true, lastLoad = Date.now();
+async function loadMore() {
+    let loadingDiv = document.querySelector('.loading');
+    try {
+        if (showingPagination) {
+            document.querySelector('.pagination').remove();
+            showingPagination = false;
+        }
+        loading = true;
+        loadingDiv.style.display = 'block';
+        // wait 4 seconds minimum from lastLoad
+        if (Date.now() - lastLoad < 4000) {
+            await new Promise(resolve => setTimeout(resolve, 2000 - (Date.now() - lastLoad)));
+        }
+        const response = await fetch(`/load-more-feed?last=${last}`);
+        const json = await response.json();
+        let items = json.items;
+        if (items.length === 0) {
+            done = true;
+            return;
+        }
+        last = items[items.length - 1].id;
+        let template = document.querySelector('.feed-item');
+        let separatorTemplate = document.querySelector('.separator');
+        const feedItems = document.querySelector('.feed-items');
+        let count = feedItems.querySelectorAll('.feed-item').length;
+        for(let i = 0; i < items.length; i++) {
+            const item = items[i];
+            const div = template.cloneNode(true);
+            div.querySelector('.feed-image').style.backgroundImage = `url('https://images.dreamgenerator.ai/${item.imagePath}')`;
+            div.querySelector('.image-description').innerText = item.text;
+            feedItems.appendChild(div);
+            feedItems.appendChild(separatorTemplate.cloneNode(true));
+        }
+        lastLoad = Date.now();
+    } catch (err) {
+        console.error(err);
+    } finally {
+        loading = false;
+        loadingDiv.style.display = 'none';
+    }
+}
+window.addEventListener("scroll", function(event) {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight - 50 && !done && !loading) {
+        loadMore();
+    }
+}, { passive: true });
+</script>
+    </head>
+    <body>
+        {{> login }}
+        <div class="feed-page">
+            {{> menu }}
+            <div style="height: 30px"></div>
+            <div class="logo-container">
+                <img src="/assets/logo.avif" class="logo" />
+            </div>
+            <div class="feed-items">
+                {{#each items}}
+                <a href="/share/{{id}}" class="feed-item">
+                    <div class="feed-image" style="background-image:url('https://images.dreamgenerator.ai/{{imagePath}}')" alt="{{text}}"></div>
+                    <div class="image-description">{{ text }}</div>
+                </a>
+                <div class="separator"></div>
+                {{/each}}
+            </div>
+            <div class="pagination">
+                <a href="/feed?last={{last}}" class="next">Next</a>
+            </div>
+            <div class="loading">Loading...</div>
+            <div class="space"></div>
+            <div class="nudity-notice">
+                It's possible that you may miss some images filtered because of nudity.  <a class="click-to-change" onclick="allowNudity()">Click to change preferences</a>
+                <a class="click-to-change dismiss" onclick="dismissNotice()">Dismiss</a>
+            </div>
+            <script>
+                const nudityNotice = document.querySelector('.nudity-notice');
+                const nudityNoticeDismissed = document.cookie.includes('nudityNoticeDismissed=true');
+                const isSignedIn = localStorage.getItem('token');
+                if (nudityNoticeDismissed || isSignedIn) {
+                    nudityNotice.style.display = 'none';
+                }
+            </script>
+        </div>
+    </body>
+</html> 

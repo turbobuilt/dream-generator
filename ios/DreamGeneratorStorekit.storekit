@@ -1,0 +1,38 @@
+{
+  "identifier" : "BEA98036",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "2C690566",
+      "localizations" : [
+        {
+          "description" : "Get Started Dreaming with this cool pack!",
+          "displayName" : "Small Credit Pack",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "the normal description",
+          "displayName" : "Normal Plan",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "ai.dreamgenerator.ios.purchase_credit_pack_1",
+      "referenceName" : "Small Credit Pack",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

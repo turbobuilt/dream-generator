@@ -1,0 +1,187 @@
+@import "font.scss";
+body, html {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+* {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+pre {
+    padding: 10px;
+    white-space: pre-wrap;
+    /* css-3 */
+    white-space: -moz-pre-wrap;
+    /* Mozilla, since 1999 */
+    white-space: -pre-wrap;
+    /* Opera 4-6 */
+    white-space: -o-pre-wrap;
+    /* Opera 7 */
+    word-wrap: break-word;
+    /* Internet Explorer 5.5+ */
+}
+.sign-in-modal-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.sign-in-modal {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 400px;
+    max-width: 100%;
+    position: relative;
+    .close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+.top-menu {
+    display: flex;
+    justify-content: space-between;
+    background: silver;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .8);
+    align-items: center;
+    height: 50px;
+    .menu-icon {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        // padding: 10px;
+        height: 24px;
+        width: 24px;
+        margin-right: 10px;
+        >div {
+            width: 100%;
+            border-radius: 10px;
+            height: 12%;
+            background: rgb(72, 72, 72);
+        }
+    }
+    .logo {
+        height: 45px;
+        border-radius: 4px;
+        margin-left: 4px;
+    }
+    h4 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+        margin-left: 10px;
+    }
+    .left {
+        display: flex;
+        align-items: center;
+    }
+    .menu-icon {
+        font-size: 40px;
+        line-height: 1;
+        @media (min-width: 768px) {
+            display: none;
+        }
+    }
+}
+.menu-items {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    a {
+        color: black;
+        text-decoration: none;
+        transition: .1s all;
+        margin-right: 10px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        &:hover {
+            // text-decoration: underline;
+            background: white;
+        }
+        &.sign-in-button {
+            height: auto;
+            border: 2px solid rgb(35, 101, 35);
+            border-radius: 3px;
+            box-shadow: 0 0 4px rgb(157, 157, 157);
+            line-height: 1;
+            padding: 4px 8px;
+            &:hover {
+                background: white;
+            }
+        }
+    }
+    @media (max-width: 768px) {
+        transform: translateX(120%);
+        transition: .3s all;
+        position: fixed;
+        top: 0px;
+        right: 0;
+        z-index: 100;
+        background: white;
+        flex-direction: column;
+        justify-content: flex-start;
+        bottom: 0;
+        box-shadow: 0 0 8px rgba(0,0,0,.8);
+        left: 20%;
+
+        a {
+            height: auto;
+            width: 100%;
+            margin: 0;
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            $padding: 10px 20px;
+            padding: $padding;
+            border-bottom: 1px solid silver;
+            &.sign-in-button {
+                padding: $padding;
+                border: none;
+                background: #d64040;
+                color: white;
+                border-radius: 0;
+            }
+        }
+    }
+}
+.menu-items-open-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+    @media (max-width: 768px) {
+        display: block;
+    }
+}
+.top-menu {
+    &.open {
+        @media (max-width: 768px) {
+            .menu-items {
+                // left: 0;
+                transform: translateX(0);
+            }
+        }
+    }
+}

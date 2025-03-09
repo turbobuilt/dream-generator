@@ -1,0 +1,17 @@
+
+.menu-page {
+    padding: 0;
+    display: flex;
+    align-items: flex-start;
+    .v-card {
+        min-width: 200px;
+        text-align: center;
+        cursor: pointer;
+        transition: .1s all;
+        &:hover {
+            background-color: whitesmoke;
+            // box-shadow: 0 0 10px black;
+            // border: 1px solid blue;
+        }
+    }
+}

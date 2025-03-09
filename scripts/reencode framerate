@@ -1,0 +1,308 @@
+Re-encoding a video to a specific frame rate (e.g., 3 fps) natively on both iOS and Android can be a bit complex, but it is certainly doable. Below are the steps and code snippets to help you achieve this on both platforms.
+
+### Android
+
+For Android, you can use the `MediaCodec` and `MediaExtractor` classes to decode and re-encode the video.
+
+1. **Add necessary permissions to `AndroidManifest.xml`:**
+    ```xml
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    ```
+
+2. **Java/Kotlin Code for Re-encoding:**
+    Create a native method to handle the re-encoding process. Here is a simplified example in Java:
+
+    ```java
+    import android.media.MediaCodec;
+    import android.media.MediaExtractor;
+    import android.media.MediaFormat;
+    import java.io.File;
+    import java.io.IOException;
+    import java.nio.ByteBuffer;
+
+    public class VideoReencoder {
+
+        public static void reencodeVideo(String inputPath, String outputPath, int targetFps) throws IOException {
+            MediaExtractor extractor = new MediaExtractor();
+            extractor.setDataSource(inputPath);
+
+            int videoTrackIndex = -1;
+            for (int i = 0; i < extractor.getTrackCount(); i++) {
+                MediaFormat format = extractor.getTrackFormat(i);
+                String mime = format.getString(MediaFormat.KEY_MIME);
+                if (mime.startsWith("video/")) {
+                    videoTrackIndex = i;
+                    break;
+                }
+            }
+
+            if (videoTrackIndex == -1) {
+                throw new IllegalArgumentException("No video track found in " + inputPath);
+            }
+
+            extractor.selectTrack(videoTrackIndex);
+            MediaFormat format = extractor.getTrackFormat(videoTrackIndex);
+            format.setInteger(MediaFormat.KEY_FRAME_RATE, targetFps);
+
+            MediaCodec decoder = MediaCodec.createDecoderByType(format.getString(MediaFormat.KEY_MIME));
+            MediaCodec encoder = MediaCodec.createEncoderByType(format.getString(MediaFormat.KEY_MIME));
+
+            // Configure decoder and encoder
+            decoder.configure(format, null, null, 0);
+            encoder.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
+
+            decoder.start();
+            encoder.start();
+
+            // Buffer handling
+            ByteBuffer[] decoderInputBuffers = decoder.getInputBuffers();
+            ByteBuffer[] decoderOutputBuffers = decoder.getOutputBuffers();
+            ByteBuffer[] encoderInputBuffers = encoder.getInputBuffers();
+            ByteBuffer[] encoderOutputBuffers = encoder.getOutputBuffers();
+
+            // Re-encoding loop
+            boolean isEOS = false;
+            while (!isEOS) {
+                int inIndex = decoder.dequeueInputBuffer(10000);
+                if (inIndex >= 0) {
+                    ByteBuffer buffer = decoderInputBuffers[inIndex];
+                    int sampleSize = extractor.readSampleData(buffer, 0);
+                    if (sampleSize < 0) {
+                        decoder.queueInputBuffer(inIndex, 0, 0, 0, MediaCodec.BUFFER_FLAG_END_OF_STREAM);
+                        isEOS = true;
+                    } else {
+                        decoder.queueInputBuffer(inIndex, 0, sampleSize, extractor.getSampleTime(), 0);
+                        extractor.advance();
+                    }
+                }
+
+                MediaCodec.BufferInfo info = new MediaCodec.BufferInfo();
+                int outIndex = decoder.dequeueOutputBuffer(info, 10000);
+                if (outIndex >= 0) {
+                    ByteBuffer buffer = decoderOutputBuffers[outIndex];
+                    encoder.queueInputBuffer(outIndex, 0, info.size, info.presentationTimeUs, info.flags);
+                    decoder.releaseOutputBuffer(outIndex, false);
+                }
+
+                int encIndex = encoder.dequeueOutputBuffer(info, 10000);
+                if (encIndex >= 0) {
+                    ByteBuffer buffer = encoderOutputBuffers[encIndex];
+                    // Write buffer to output file
+                    // ...
+                    encoder.releaseOutputBuffer(encIndex, false);
+                }
+            }
+
+            decoder.stop();
+            decoder.release();
+            encoder.stop();
+            encoder.release();
+            extractor.release();
+        }
+    }
+    ```
+
+3. **Call the native method from Flutter:**
+    Use the `MethodChannel` to call the native method from your Dart code.
+
+    ```dart
+    import 'package:flutter/services.dart';
+
+    class VideoReencoder {
+      static const MethodChannel _channel = MethodChannel('video_reencoder');
+
+      static Future<void> reencodeVideo(String inputPath, String outputPath, int targetFps) async {
+        try {
+          await _channel.invokeMethod('reencodeVideo', {
+            'inputPath': inputPath,
+            'outputPath': outputPath,
+            'targetFps': targetFps,
+          });
+        } on PlatformException catch (e) {
+          print("Failed to reencode video: '${e.message}'.");
+        }
+      }
+    }
+    ```
+
+4. **Register the MethodChannel in your Android project:**
+    In your `MainActivity.java` or `MainActivity.kt`, register the method channel.
+
+    ```java
+    import io.flutter.embedding.android.FlutterActivity;
+    import io.flutter.embedding.engine.FlutterEngine;
+    import io.flutter.plugin.common.MethodChannel;
+
+    public class MainActivity extends FlutterActivity {
+        private static final String CHANNEL = "video_reencoder";
+
+        @Override
+        public void configureFlutterEngine(FlutterEngine flutterEngine) {
+            super.configureFlutterEngine(flutterEngine);
+            new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+                .setMethodCallHandler(
+                    (call, result) -> {
+                        if (call.method.equals("reencodeVideo")) {
+                            String inputPath = call.argument("inputPath");
+                            String outputPath = call.argument("outputPath");
+                            int targetFps = call.argument("targetFps");
+                            try {
+                                VideoReencoder.reencodeVideo(inputPath, outputPath, targetFps);
+                                result.success(null);
+                            } catch (IOException e) {
+                                result.error("IO_ERROR", "Failed to reencode video", e);
+                            }
+                        } else {
+                            result.notImplemented();
+                        }
+                    }
+                );
+        }
+    }
+    ```
+
+### iOS
+
+For iOS, you can use the `AVAssetReader` and `AVAssetWriter` classes to decode and re-encode the video.
+
+1. **Add necessary permissions to `Info.plist`:**
+    ```xml
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>We need access to your photo library to save the re-encoded video.</string>
+    ```
+
+2. **Objective-C/Swift Code for Re-encoding:**
+    Create a native method to handle the re-encoding process. Here is a simplified example in Swift:
+
+    ```swift
+    import AVFoundation
+
+    class VideoReencoder: NSObject {
+        @objc static func reencodeVideo(inputPath: String, outputPath: String, targetFps: Int, completion: @escaping (Error?) -> Void) {
+            let inputURL = URL(fileURLWithPath: inputPath)
+            let outputURL = URL(fileURLWithPath: outputPath)
+
+            let asset = AVAsset(url: inputURL)
+            guard let videoTrack = asset.tracks(withMediaType: .video).first else {
+                completion(NSError(domain: "VideoReencoder", code: -1, userInfo: [NSLocalizedDescriptionKey: "No video track found"]))
+                return
+            }
+
+            let reader: AVAssetReader
+            let writer: AVAssetWriter
+            do {
+                reader = try AVAssetReader(asset: asset)
+                writer = try AVAssetWriter(outputURL: outputURL, fileType: .mp4)
+            } catch {
+                completion(error)
+                return
+            }
+
+            let readerOutput = AVAssetReaderTrackOutput(track: videoTrack, outputSettings: nil)
+            reader.add(readerOutput)
+
+            let writerInput = AVAssetWriterInput(mediaType: .video, outputSettings: [
+                AVVideoCodecKey: AVVideoCodecType.h264,
+                AVVideoWidthKey: videoTrack.naturalSize.width,
+                AVVideoHeightKey: videoTrack.naturalSize.height,
+                AVVideoCompressionPropertiesKey: [
+                    AVVideoAverageBitRateKey: videoTrack.estimatedDataRate,
+                    AVVideoMaxKeyFrameIntervalKey: targetFps
+                ]
+            ])
+            writer.add(writerInput)
+
+            writerInput.expectsMediaDataInRealTime = false
+
+            reader.startReading()
+            writer.startWriting()
+            writer.startSession(atSourceTime: .zero)
+
+            let processingQueue = DispatchQueue(label: "videoReencodingQueue")
+            writerInput.requestMediaDataWhenReady(on: processingQueue) {
+                while writerInput.isReadyForMoreMediaData {
+                    if let sampleBuffer = readerOutput.copyNextSampleBuffer() {
+                        writerInput.append(sampleBuffer)
+                    } else {
+                        writerInput.markAsFinished()
+                        writer.finishWriting {
+                            completion(nil)
+                        }
+                        break
+                    }
+                }
+            }
+        }
+    }
+    ```
+
+3. **Call the native method from Flutter:**
+    Use the `MethodChannel` to call the native method from your Dart code.
+
+    ```dart
+    import 'package:flutter/services.dart';
+
+    class VideoReencoder {
+      static const MethodChannel _channel = MethodChannel('video_reencoder');
+
+      static Future<void> reencodeVideo(String inputPath, String outputPath, int targetFps) async {
+        try {
+          await _channel.invokeMethod('reencodeVideo', {
+            'inputPath': inputPath,
+            'outputPath': outputPath,
+            'targetFps': targetFps,
+          });
+        } on PlatformException catch (e) {
+          print("Failed to reencode video: '${e.message}'.");
+        }
+      }
+    }
+    ```
+
+4. **Register the MethodChannel in your iOS project:**
+    In your `AppDelegate.swift`, register the method channel.
+
+    ```swift
+    import UIKit
+    import Flutter
+
+    @UIApplicationMain
+    @objc class AppDelegate: FlutterAppDelegate {
+        override func application(
+            _ application: UIApplication,
+            didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+        ) -> Bool {
+            let controller: FlutterViewController = window?.rootViewController as! FlutterViewController
+            let channel = FlutterMethodChannel(name: "video_reencoder", binaryMessenger: controller.binaryMessenger)
+
+            channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in
+                if call.method == "reencodeVideo" {
+                    guard let args = call.arguments as? [String: Any],
+                          let inputPath = args["inputPath"] as? String,
+                          let outputPath = args["outputPath"] as? String,
+                          let targetFps = args["targetFps"] as? Int else {
+                        result(FlutterError(code: "INVALID_ARGUMENTS", message: "Invalid arguments", details: nil))
+                        return
+                    }
+
+                    VideoReencoder.reencodeVideo(inputPath: inputPath, outputPath: outputPath, targetFps: targetFps) { error in
+                        if let error = error {
+                            result(FlutterError(code: "REENCODE_ERROR", message: error.localizedDescription, details: nil))
+                        } else {
+                            result(nil)
+                        }
+                    }
+                } else {
+                    result(FlutterMethodNotImplemented)
+                }
+            }
+
+            return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+        }
+    }
+    ```
+
+### Conclusion
+
+By following these steps, you should be able to re-encode a video to a specific frame rate natively on both Android and iOS. The provided code snippets are simplified and may need further adjustments based on your specific requirements and error handling needs.

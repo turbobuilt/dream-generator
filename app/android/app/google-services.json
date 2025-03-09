@@ -1,0 +1,115 @@
+{
+  "project_info": {
+    "project_number": "790316791498",
+    "project_id": "dreamgenerator-1691405135213",
+    "storage_bucket": "dreamgenerator-1691405135213.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790316791498:android:0e473e54f5fc3c955de633",
+        "android_client_info": {
+          "package_name": "ai.dreamgenerator.apptwo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790316791498-5c5anf0qc1huqol5tqpi2h208teb3spf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.dreamgenerator.app",
+            "certificate_hash": "a28c44346b7aacf1a40cf87252e1c9db1c209243"
+          }
+        },
+        {
+          "client_id": "790316791498-dgm05c8bih85b3t98oq7uphi7ivuctgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.dreamgenerator.app",
+            "certificate_hash": "2e656bb8c2ee4a5427aa79bdae080b5b57db61f8"
+          }
+        },
+        {
+          "client_id": "790316791498-hc4uuem6acbkfjoa2hoeeh6kf4i1gv4q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.dreamgenerator.app",
+            "certificate_hash": "311a4d5715b80a551f0648bd7929a637a88cefda"
+          }
+        },
+        {
+          "client_id": "790316791498-neasutdbrr0kcumihnai4hk778n0qfa1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ai.dreamgenerator.app",
+            "certificate_hash": "23aef9296b7ba22c285df2162a1c3e69fcbb96e3"
+          }
+        },
+        {
+          "client_id": "790316791498-3v4aburatuui2n989tdp3cstr97ss1ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSnzaWjGm70-9u5sIXEmvSlOY3FHLfhJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790316791498-3v4aburatuui2n989tdp3cstr97ss1ti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "790316791498-821vknncnv4b5r7v7ds31ovep8borcap.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ai.dreamgenerator.app"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-5134357171537179~2391853919"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790316791498:android:4fbb373b950d6d035de633",
+        "android_client_info": {
+          "package_name": "ai.dreamgenerator.dreamgenerator_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790316791498-3v4aburatuui2n989tdp3cstr97ss1ti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSnzaWjGm70-9u5sIXEmvSlOY3FHLfhJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790316791498-3v4aburatuui2n989tdp3cstr97ss1ti.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "790316791498-821vknncnv4b5r7v7ds31ovep8borcap.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ai.dreamgenerator.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,25 @@
+$primary: #2196f3;
+$secondary: rgb(156, 39, 176);
+$darkBg: rgb(77, 77, 77);
+$secondary-gradient-small: rgb(179, 56, 255);
+$modalBorderRadius: 25px;
+$modalPadding: 15px;
+$infoBg: #444444;
+$mobileBreakPoint: 768px;
+.no-scroll-bar {
+    // hide scroll bar
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    &::-webkit-scrollbar {
+        width: 1px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+}

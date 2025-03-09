@@ -1,0 +1,23 @@
+{
+//   "extends": "@vue/tsconfig/tsconfig.dom.json",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.ts"],
+  "exclude": ["src/**/__tests__/*"],
+  "compilerOptions": {
+    "composite": true,
+    // "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "useUnknownInCatchVariables": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "strict": false,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "alwaysStrict": false,
+    "strictFunctionTypes": false,
+  }
+}

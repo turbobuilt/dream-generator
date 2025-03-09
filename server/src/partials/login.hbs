@@ -1,0 +1,81 @@
+<style>
+    .login-background {
+        /*background-image: url("https://images.dreamgenerator.ai/3u7gePQmk1rMLKKLjq36iN/3u7gePQmk1rMLKKLjq36iN-1619110000.jpg");*/
+        background-size: cover;
+        background-position: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2;
+        background: rgba(0, 0, 0, .2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+
+    .login-box {
+        box-shadow: 0 0 4px rgba(0, 0, 0, .4);
+        background: gainsboro;
+        padding: 10px;
+    }
+</style>
+<script>
+    async function handleCredentialResponse(response) {
+        console.log(response);
+        if (response.credential) {
+            // Send the credential to your server.
+            let result = await fetch('/api/oauth-login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    token: response.credential,
+                    provider: "google",
+                    allowNudity: true
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                const { authenticatedUser, token, newUser, error } = data;
+                if (error) {
+                    document.querySelector('.signin-error').innerHTML = error;
+                } else {
+                    // set cookie "token" to token with no expiry
+                    document.cookie = `token=${token};path=/`;
+                    // save token and user to local storage
+                    localStorage.setItem("token", token);
+                    localStorage.setItem("accountCreated", "true");
+                    window.location.href = '/app/feed';
+                }
+            }).catch(err => {
+                document.querySelector('.signin-error').innerHTML = err.message;
+                console.log(err);
+            });
+        }
+    }
+    window.handleCredentialResponse = handleCredentialResponse;
+</script>
+<div class="login-background">
+    <div class="login-box">
+        <!-- login with google button -->
+        <script src="https://accounts.google.com/gsi/client" async></script>
+        <div id="g_id_onload"
+            data-client_id="790316791498-utie09qvamofv7put3tfbgltjnkghrjk.apps.googleusercontent.com"
+            data-callback="handleCredentialResponse"
+            data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+            data-type="standard"
+            data-size="large"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-shape="rectangular"
+            data-logo_alignment="left">
+        </div>
+        <div class="signin-error"></div>
+    </div>
+</div>

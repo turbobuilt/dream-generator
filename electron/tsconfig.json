@@ -1,0 +1,24 @@
+{
+    //   "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "include": [ "**/*.d.ts", "src/**/*", "src/**/*.vue", "src/**/*.ts" ],
+    "exclude": [ "src/**/__tests__/*" ],
+    "compilerOptions": {
+        "composite": true,
+        "baseUrl": "./src",
+        "paths": {
+            "@/*": [ "./src/*" ]
+        },
+        "target": "esnext",
+        "module": "ES2020",
+        "useUnknownInCatchVariables": false,
+        "noImplicitAny": false,
+        "strictNullChecks": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": false,
+        "strict": false,
+        "esModuleInterop": true,
+        "alwaysStrict": false,
+        "strictFunctionTypes": false,
+    }
+}

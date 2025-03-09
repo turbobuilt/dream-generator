@@ -1,0 +1,55 @@
+create a function called showReplyWithImageSelector(Map<String, dynamic> share) that shows a modal bottom sheet with three elevated buttons that take the full width of the bottom sheet (use modal_bottom_sheet package). 
+
+The first button is "pick from your images", 
+the second is "Remix Prompt",
+the third is "Fresh Prompt"
+
+if they pick the first one, show another bottom sheet that displays all the images in a grid (with zero padding at edges) showing rows of 2 images, using all images from (globalDisplayAllImagesViewStore.imagePaths).  If they touch an image, call a function you create called replyWithImage(imageUrl, share) that does the following:
+
+final fileName = imageUrl.split('/').last;
+final imageData = await CurrentImageData.load(fileName);
+
+which will load the image metadata given the file path:
+// class CurrentImageData {
+//   String name = "";
+//   String prompt = "";
+//   String style = "";
+//   int? mostRecentShare;
+//   var liked = false;
+//   int? promptId;
+//   var isOwnPrompt = false;
+//   String? model;
+
+now, you must do some things to create the share. First run the nudity detector
+
+bool hasNudity = await FlutterNudeDetector.detect(path: imageUrl);
+
+then you must convert it to avif
+
+final imageBytes = await File(imageUrl).readAsBytes();
+final avifBytes = await encodeAvif(imageBytes);
+
+final result = await postRequest("/api/share", {
+    "parent": share["id"],
+    "text": imageData.prompt,
+    "nudity": hasNudity,
+}, imageData: avifBytes);
+
+if (result.error?.isNotEmpty == true) {
+  print("Error saving comment");
+  print(result.error);
+  return "Error saving comment.  Contact support@dreamgenerator.ai for help";
+}
+
+return from the function result.result;
+
+
+
+hold off on implementing the second and third options
+
+
+if they pick the second or third option go to the share page like this:
+router.pushNamed("shareView", extra: share, pathParameters: { "id": shareId.toString() });
+
+
+then do the following:

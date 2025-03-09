@@ -1,0 +1,1 @@
+npx concurrently "cd server && ./dev.sh" "cd webapp && ./dev.sh" "nodemon --watch server/src --exec 'bun ./scripts/copyModelsToClient.js'"

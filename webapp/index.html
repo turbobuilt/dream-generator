@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- viewport fit full screen -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Use Dream Generator to make amazing digital art.  Anything you can imagine can be generated with AI. Start now!" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+    <link rel="mask-icon" href="/mask-icon.svg" color="#FFFFFF">
+    <meta name="theme-color" content="#2196f3">
+
+    <link rel="apple-touch-startup-image" href="/apple-touch-startup-image/apple_splash_1668.png">
+    <link href="apple-touch-startup-image/apple_splash_2048.png" sizes="2048x2732" rel="apple-touch-startup-image" />
+    <link href="apple-touch-startup-image/apple_splash_1668.png" sizes="1668x2224" rel="apple-touch-startup-image" />
+    <link href="apple-touch-startup-image/apple_splash_1536.png" sizes="1536x2048" rel="apple-touch-startup-image" />
+    <link href="apple-touch-startup-image/apple_splash_1125.png" sizes="1125x2436" rel="apple-touch-startup-image" />
+    <link href="apple-touch-startup-image/apple_splash_1242.png" sizes="1242x2208" rel="apple-touch-startup-image" />
+    <link href="apple-touch-startup-image/apple_splash_750.png" sizes="750x1334" rel="apple-touch-startup-image" />
+    <link href="apple-touch-startup-image/apple_splash_640.png" sizes="640x1136" rel="apple-touch-startup-image" />
+    <title>Dream Generator AI</title>
+</head>
+
+<body>
+    <script>
+        // alert("the app is undergoing maintenance, and doesn't work right now. Hopefully will fix today!")
+    </script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <div id="app"></div>
+     <div></div>
+    <div class="main-loading-div" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; right: 0; bottom: 0; transition: .1s all; z-index: 1;">
+        <div class="loading-s"></div>
+    </div>
+    <style>
+        /** spinning animation */
+        .loading-s {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #3498db;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+        /** spinning animation */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script type="module" src="/src/main.ts"></script>
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10814930481"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-10814930481');
+    </script>
+    -->
+    <!-- Meta Pixel Code --
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1097384478163658');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1097384478163658&ev=PageView&noscript=1" /></noscript>
+    !-- End Meta Pixel Code -->
+</body>
+
+</html>

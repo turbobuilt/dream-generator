@@ -1,0 +1,20 @@
+# electron-builder.yml
+
+# Set the target to build an NSIS
+win:
+  target: [nsis]
+# publish:
+#   provider: generic
+#   url: https://updates.dreamgenerator.ai
+publish:
+  provider: s3
+  bucket: dreamgeneratorupdates
+  endpoint: https://6d1fd8715ac1dc4960355505312f9f79.r2.cloudflarestorage.com
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: true
+  installerIcon: assets/logo.ico
+  uninstallerIcon: assets/logo.ico
+  license: documentation/license.txt
+  artifactName: "dream_generator_ai_setup_${version}.${ext}"

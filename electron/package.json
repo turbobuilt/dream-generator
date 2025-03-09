@@ -1,0 +1,41 @@
+{
+  "name": "dream-generator",
+  "productName": "Dream Generator AI",
+  "description": "AI for Everyone",
+  "version": "1.2.4",
+  "main": "./local/build/main.js",
+  "scripts": {
+    "start": "electron local/build/main.js"
+  },
+  "devDependencies": {
+    "@electron-forge/plugin-vite": "^7.4.0",
+    "@electron/packager": "^18.3.2",
+    "@types/bun": "^1.0.12",
+    "@types/node": "^20.12.7",
+    "electron": "^30.0.6",
+    "electron-builder": "^24.13.3",
+    "esbuild": "^0.20.2",
+    "esbuild-node-tsc": "^2.0.5",
+    "esbuild-plugin-copy": "^2.1.1",
+    "glob-watcher": "^6.0.0",
+    "tsx": "^4.7.2"
+  },
+  "dependencies": {
+    "@aislamov/diffusers.js": "^0.9.3",
+    "@tensorflow/tfjs-node": "^4.18.0",
+    "adm-zip": "^0.5.12",
+    "axios": "^1.6.8",
+    "cross-spawn": "^7.0.3",
+    "electron-updater": "^6.1.8",
+    "jimp": "^0.22.12",
+    "modelfusion": "^0.137.0",
+    "node-downloader-helper": "^2.1.9",
+    "node-fetch": "^3.3.2",
+    "node-wav": "^0.0.2",
+    "openvino-node": "^2024.0.0",
+    "pidusage": "^3.0.2",
+    "sharp": "^0.33.3",
+    "tree-kill": "^1.2.2",
+    "typescript": "^5.4.5"
+  }
+}

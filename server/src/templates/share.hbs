@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ai dream generator - AI thinks this is what '{{text}}' looks like">
+    <meta property="og:image" content="{{imageUrl}}" />
+    <meta property="og:image:width" content="1024" />
+    <meta property="og:image:height" content="1024" />
+    <meta property="og:title" content="Dream Generator AI Art" />
+    <meta property="og:description" content="AI thinks this is what '{{text}}' looks like" />
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@dreamgenerator">
+    <meta name="twitter:title" content="Dream Generator AI Art">
+    <meta name="twitter:description" content="AI thinks this is what '{{text}}' looks like">
+    <meta name="twitter:image" content="{{twitterUrl}}">
+    <meta name="twitter:image:alt" content="Dream Generator AI Art">
+    <meta name="twitter:creator" content="@dreamgenerator">
+
+    <meta name="keywords" content="dream generator, dreamgenerator, ai, artificial intelligence, neural network, deep learning, machine learning, art, images, image, image generation, image generator, image creation, image creator, image maker, image making, image editing, image editor, image manipulation, image manipulator, image manipulation, image manipulation" />
+    <meta name="author" content="Dream Generator AI Art">
+    <meta name="robots" content="index, follow">
+    <meta name="distribution" content="web">
+    <meta name="rating" content="general">
+    <title>Dream Generator AI Art</title>
+    <style>
+        h1 {
+            width: 100%;
+        }
+
+        .share-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .promo {
+            font-size: 18px;
+            padding: 20px 20px;
+        }
+
+        .share {
+            padding: 20px;
+            padding-top: 0;
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 1024px;
+            width: 100%;
+        }
+
+        .share img {
+            max-width: 100%;
+        }
+
+        img {
+            max-width: 90%
+        }
+
+        .download-icons img {
+            height: 50px;
+            margin: 10px;
+        }
+
+        .download-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        @media (max-width: 500px) {
+            .download-icons {
+                flex-direction: column;
+            }
+        }
+
+        .title {
+            text-align: center;
+            background-color: purple;
+            padding: 20px;
+            color: white;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="share-page">
+        {{> menu }}
+        <div class="promo">Create Amazing AI Art with DreamGenerator.ai!</div>
+        <div class="share">
+            <img src="{{imageUrl}}" />
+            <br>
+            <h2>{{ text }}</h2>
+            <br>
+            <div>Created By {{userName}}</div>
+        </div>
+
+        <div class="download-icons">
+            <a href="https://apps.apple.com/us/app/dreamgenerator-ai/id6462812836">
+                <img src="https://images.dreamgenerator.ai/download-app-store.png" class="app-store-link" />
+            </a>
+            <br>
+            <a href="https://play.google.com/store/apps/details?id=ai.dreamgenerator.app">
+                <img src="https://images.dreamgenerator.ai/google-play-badge-cropped.png" class="app-store-link" />
+            </a>
+        </div>
+        <h3>Get started creating amazing AI Art today. Download the app and get started free of charge. Thanks for your help and support!</h3>
+    </div>
+    <br><br><br>
+</body>
+
+</html>
